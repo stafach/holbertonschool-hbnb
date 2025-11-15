@@ -3,26 +3,39 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>List of Places</title>
+    <title>BlockBnB - List of Places</title>
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
     <header>
+        <img src="images/Logo.png" alt="BlockBnB logo" class="logo">
         <nav>
-            <a href="login.html" id="login-link">Login</a>
+            <a href="index.html">Home</a>
+            <a href="login.html" class="login-button">Login</a>
         </nav>
     </header>
+
     <main>
-        <section id="filter">
-            <label for="price-filter">Max Price:</label>
-            <select id="price-filter">
-                <!-- Options will be populated dynamically -->
-            </select>
-        </section>
+        <h1>Available Places</h1>
         <section id="places-list">
-            <!-- List of places will be populated dynamically -->
+            <div class="place-card">
+                <h3>Futuristic Apartment</h3>
+                <p>City: Paris, France</p>
+                <p>Price: 120€ / night</p>
+                <button class="details-button">View Details</button>
+            </div>
+
+            <div class="place-card">
+                <h3>Villa on the Blockchain</h3>
+                <p>City: Bali, Indonesia</p>
+                <p>Price: 200€ / night</p>
+                <button class="details-button">View Details</button>
+            </div>
         </section>
     </main>
-    <script src="scripts.js"></script>
+
+    <footer>
+        <p>© 2025 BlockBnB - All Rights Reserved</p>
+    </footer>
 </body>
 </html>

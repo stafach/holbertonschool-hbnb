@@ -3,23 +3,40 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Add Review</title>
+    <title>Add Review - BlockBnB</title>
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
+    <header>
+       <img src="images/Logo.png" alt="BlockBnB logo" class="logo">
+        <nav>
+            <a href="index.html">Home</a>
+            <a href="login.html">Login</a>
+        </nav>
+    </header>
+
     <main>
-        <!-- Add something to idfentify the place you're reviewing -->
         <form id="review-form">
             <h2>Add a Review</h2>
             <label for="review">Your Review:</label>
             <textarea id="review" name="review" required></textarea>
+
             <label for="rating">Rating:</label>
             <select id="rating" name="rating" required>
-                <!-- Options for rating -->
+                <option value="">Select</option>
+                <option>★☆☆☆☆</option>
+                <option>★★☆☆☆</option>
+                <option>★★★☆☆</option>
+                <option>★★★★☆</option>
+                <option>★★★★★</option>
             </select>
+
             <button type="submit">Submit Review</button>
         </form>
     </main>
-    <script src="scripts.js"></script>
+
+    <footer>
+        <p>© 2025 BlockBnB - All Rights Reserved</p>
+    </footer>
 </body>
 </html>

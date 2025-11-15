@@ -3,27 +3,62 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Place Details</title>
+    <title>Place Details - BlockBnB</title>
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
+    <header>
+        <img src="images/Logo.png" alt="BlockBnB logo" class="logo">
+        <nav>
+            <a href="index.html">Home</a>
+            <a href="login.html">Login</a>
+        </nav>
+    </header>
+
     <main>
-        <section id="place-details">
-            <!-- Place details will be populated dynamically -->
+        <section class="place-details">
+            <h2>Villa</h2>
+            <div class="place-info">
+                <p><strong>Host:</strong> Alice</p>
+                <p><strong>Location:</strong> Bali, Indonesia</p>
+                <p><strong>Price:</strong> 200€ / night</p>
+                <p><strong>Description:</strong> A luxurious villa linked to the BlockBnB network.</p>
+                <p><strong>Amenities:</strong> Pool, WiFi, Kitchen, Smart Contract Lock</p>
+            </div>
         </section>
+
         <section id="reviews">
-            <!-- Reviews will be populated dynamically -->
+            <div class="review-card">
+                <p><strong>John:</strong> Amazing futuristic stay!</p>
+            </div>
+            <div class="review-card">
+                <p><strong>Sarah:</strong> Loved the blockchain theme</p>
+            </div>
         </section>
+
         <section id="add-review">
             <h2>Add a Review</h2>
-            <form id="review-form">
-                <label for="review-text">Review:</label>
+            <form id="review-form" class="add-review">
+                <label for="review-text">Your Review:</label>
                 <textarea id="review-text" name="review-text" required></textarea>
                 
-                <button type="submit">Submit</button>
+                <label for="rating">Rating:</label>
+                <select id="rating" name="rating" required>
+                    <option value="">Select</option>
+                    <option>★☆☆☆☆</option>
+                    <option>★★☆☆☆</option>
+                    <option>★★★☆☆</option>
+                    <option>★★★★☆</option>
+                    <option>★★★★★</option>
+                </select>
+
+                <button type="submit">Submit Review</button>
             </form>
         </section>
     </main>
-    <script src="scripts.js"></script>
+
+    <footer>
+        <p>© 2025 BlockBnB - All Rights Reserved</p>
+    </footer>
 </body>
 </html>
