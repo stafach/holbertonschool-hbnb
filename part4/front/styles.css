@@ -1,32 +1,178 @@
-/* 
-  This is a SAMPLE File to get you started. Follow the instructions on the project to complete the tasks. 
-  You'll probably need to override some of theese styles.
-*/
+/* ======= BlockBnB Futuristic Theme ======= */
 
 * {
     box-sizing: border-box;
     margin: 0;
     padding: 0;
-    font-family: Arial, sans-serif;
+    font-family: "Poppins", sans-serif;
 }
 
 body {
-    background-color: #f4f4f4;
-    color: #333;
+    background: radial-gradient(circle at center, #0a0a20, #050510);
+    color: #eaeaea;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
 }
 
+/* ===== Header & Navigation ===== */
 header {
-    background-color: #333;
-    color: #fff;
-    padding: 1rem;
+    background: rgba(255, 255, 255, 0.05);
+    border-bottom: 1px solid rgba(140, 80, 255, 0.4);
+    padding: 1rem 2rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    backdrop-filter: blur(10px);
 }
 
-nav a {
-    color: #fff;
+header .logo {
+    font-size: 1.8rem;
+    font-weight: 700;
+    color: #bb86ff;
+    letter-spacing: 1px;
+}
+
+.logo {
+  height: 10rem;
+  width: auto;
+  display: inline-block;
+}
+
+
+nav a,
+.login-button {
+    color: #bb86ff;
     text-decoration: none;
-    margin-left: 1rem;
+    font-weight: 500;
+    margin-left: 1.5rem;
+    transition: color 0.3s ease;
 }
 
+nav a:hover,
+.login-button:hover {
+    color: #ffffff;
+}
+
+/* ===== Main ===== */
 main {
+    flex: 1;
     padding: 2rem;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+/* ===== Place Cards ===== */
+.place-card, .review-card {
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(120, 60, 255, 0.3);
+    border-radius: 10px;
+    padding: 10px;
+    margin: 20px;
+    box-shadow: 0 0 20px rgba(150, 80, 255, 0.2);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.place-card:hover {
+    transform: scale(1.03);
+    box-shadow: 0 0 30px rgba(150, 80, 255, 0.4);
+}
+
+.place-card h3 {
+    color: #bb86ff;
+}
+
+.place-card p {
+    margin-top: 8px;
+}
+
+.details-button {
+    background: linear-gradient(90deg, #7b2ff7, #f107a3);
+    border: none;
+    color: white;
+    padding: 10px 20px;
+    border-radius: 8px;
+    margin-top: 10px;
+    cursor: pointer;
+    transition: transform 0.3s ease, opacity 0.3s ease;
+}
+
+.details-button:hover {
+    transform: scale(1.05);
+    opacity: 0.9;
+}
+
+/* ===== Forms ===== */
+form {
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(120, 60, 255, 0.3);
+    border-radius: 10px;
+    padding: 20px;
+    box-shadow: 0 0 15px rgba(150, 80, 255, 0.2);
+    max-width: 400px;
+    margin: 0 auto;
+}
+
+form h2 {
+    color: #bb86ff;
+    margin-bottom: 1rem;
+    text-align: center;
+}
+
+label {
+    display: block;
+    margin-top: 10px;
+    font-weight: 500;
+}
+
+input, select, textarea {
+    width: 100%;
+    padding: 8px;
+    margin-top: 5px;
+    border-radius: 6px;
+    border: none;
+    background: rgba(255, 255, 255, 0.1);
+    color: white;
+}
+
+button {
+    margin-top: 15px;
+    width: 100%;
+    background: linear-gradient(90deg, #7b2ff7, #f107a3);
+    border: none;
+    color: white;
+    padding: 10px;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: transform 0.3s ease;
+}
+
+button:hover {
+    transform: scale(1.05);
+}
+
+/* ===== Place Details ===== */
+.place-details {
+    display: flex;
+    flex-direction: column;
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 10px;
+    padding: 20px;
+    margin-bottom: 2rem;
+}
+
+.place-info {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+/* ===== Footer ===== */
+footer {
+    background: rgba(255, 255, 255, 0.05);
+    border-top: 1px solid rgba(140, 80, 255, 0.4);
+    text-align: center;
+    padding: 1rem;
+    font-size: 0.9rem;
+    color: #bbb;
 }
