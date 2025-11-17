@@ -23,7 +23,7 @@ def create_app(config_class=config.DevelopmentConfig):
 
     db.init_app(app)
 
-    CORS(app, resources={r"/api/v1/*": {"origins": "http://localhost:5500"}})
+    CORS(app, resources={r"/api/v1/*": {"origins": "http://127.0.0.1:5500"}})
     
     api = Api(app, version='1.0', title='HBnB API', description='HBnB Application API', doc='/api/v1/')
     api.add_namespace(users_ns, path='/api/v1/users')
