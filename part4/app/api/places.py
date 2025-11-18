@@ -67,6 +67,8 @@ class PlaceList(Resource):
             {
                 "id": all_places_items.id,
                 "title": all_places_items.title,
+                "price": all_places_items.price,
+                "description": all_places_items.description,
                 "latitude": all_places_items.latitude,
                 "longitude": all_places_items.longitude
             }
