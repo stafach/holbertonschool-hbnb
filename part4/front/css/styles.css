@@ -39,7 +39,6 @@ header .logo {
   display: inline-block;
 }
 
-
 nav a,
 .login-button {
     color: #bb86ff;
@@ -62,15 +61,68 @@ main {
     margin: 0 auto;
 }
 
+/* ===== Wrapper pour filtre + contenu ===== */
+.places-wrapper {
+    display: flex;
+    gap: 20px; /* espace entre filtre et contenu */
+}
+
+/* Filtre à gauche */
+.filter-block {
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(120, 60, 255, 0.3);
+    border-radius: 10px;
+    padding: 15px;
+    min-width: 150px;
+    height: fit-content;
+    box-shadow: 0 0 15px rgba(150, 80, 255, 0.3);
+}
+
+.filter-block label {
+    display: block;
+    margin-bottom: 10px;
+    font-weight: 500;
+    color: #bb86ff;
+}
+
+.filter-block select {
+    width: 100%;
+    padding: 8px;
+    border-radius: 6px;
+    border: none;
+    background: rgba(255, 255, 255, 0.1);
+    color: white;
+}
+
+/* Colonne contenu (titre + cartes) */
+.places-content {
+    display: flex;
+    flex-direction: column; /* empile le titre et les cartes */
+    flex: 1; /* prend tout l’espace restant */
+}
+
+.places-content h1 {
+    margin-bottom: 15px;
+    color: #bb86ff;
+}
+
+/* Liste des places */
+#places-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+}
+
 /* ===== Place Cards ===== */
 .place-card, .review-card {
     background: rgba(255, 255, 255, 0.05);
     border: 1px solid rgba(120, 60, 255, 0.3);
     border-radius: 10px;
     padding: 10px;
-    margin: 20px;
+    margin: 0; /* margin géré par gap du flex */
     box-shadow: 0 0 20px rgba(150, 80, 255, 0.2);
     transition: transform 0.3s ease, box-shadow 0.3s ease;
+    width: 220px; /* largeur fixe pour un style bloc */
 }
 
 .place-card:hover {

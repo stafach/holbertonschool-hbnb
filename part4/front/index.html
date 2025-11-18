@@ -15,18 +15,31 @@
         </nav>
     </header>
 
-    <main>
-        <h1>Available Places</h1>
+<main>
+    <div class="places-wrapper">
+        <div class="filter-block">
+            <label for="price-filter">Filter by Price:</label>
+            <select id="price-filter">
+                <option value="10">10</option>
+                <option value="50">50</option>
+                <option value="100">100</option>
+                <option value="All">All</option>
+            </select>
+        </div>
 
-        <section id="places-list">
-            <!-- Dynamic place cards inserted by scripts.js -->
-        </section>
-    </main>
+        <div class="places-content">
+            <h1>Available Places</h1>
+            <section id="places-list">
+                <!-- Dynamic place cards inserted by scripts.js -->
+            </section>
+        </div>
+    </div>
+</main>
 
     <footer>
         <p>© 2025 BlockBnB — All rights reserved.</p>
     </footer>
 
-    <script src="scripts.js"></script>
+    <script src="js/scripts.js"></script>
 </body>
 </html>
