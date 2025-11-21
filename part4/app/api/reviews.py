@@ -42,7 +42,7 @@ class ReviewList(Resource):
         place = facade.get_place(review_data.get("place_id"))
         if not place:
             return {"error": "Place not found"}, 404
-        review_owner = facade.get_user(review_data.get("user_id"))
+        review_owner = facade.get_user(current_user)
         if not review_owner:
             return {"error": "User not found"}, 404
         
@@ -53,7 +53,12 @@ class ReviewList(Resource):
         if existing_review:
             return {"error": "You have already reviewed this place."}, 400
         try:
-            new_review = facade.create_review(review_data)
+            new_review = facade.create_review({
+                "text": review_data["text"],
+                "rating": review_data["rating"],
+                "place_id": review_data["place_id"],
+                "user_id": current_user
+            })
         except:
             return {"error": "Invalid input data"}, 400
         return {'id': new_review.id, 'text': new_review.text, 'rating': new_review.rating, 'user_id': new_review.user_id, 'place_id': new_review.place_id}, 201
