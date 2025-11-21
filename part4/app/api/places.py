@@ -91,6 +91,7 @@ class PlaceResource(Resource):
         return {
             "id": place.id,
             "title": place.title,
+            "price": place.price,
             "description": place.description,
             "latitude": place.latitude,
             "longitude": place.longitude,
@@ -101,8 +102,17 @@ class PlaceResource(Resource):
                 "email": owner.email
             },
             "amenities": [
-                {"id": a.id, "name": a.name} for a in amenities
-            ]
+                {"id": amenity.id, "name": amenity.name} for amenity in amenities
+            ],
+                "reviews": [
+                        {
+                            "id": review.id,
+                            "rating": review.rating,
+                            "text": review.text,
+                            "user_id": review.user_id
+                        }
+                        for review in place.reviews
+                    ]
         }, 200
 
     @api.expect(place_model, validate=True)
@@ -153,3 +163,27 @@ class PlaceReviewList(Resource):
             }
             for existing_place_items in existing_place.reviews
         ], 200
+    
+
+@api.route('/<place_id>/amenities')
+class PlaceAmenityResource(Resource):
+    @api.expect(api.model('AddAmenity', {
+        'amenity_id': fields.String(required=True, description="Amenity ID")
+    }))
+    @api.response(200, 'Amenity added to place')
+    @api.response(404, 'Place or Amenity not found')
+    @jwt_required()
+    def post(self, place_id):
+        place = facade.get_place(place_id)
+        if not place:
+            return {"error": "Place not found"}, 404
+        
+        amenity_id = api.payload.get('amenity_id')
+        amenity = facade.get_amenity(amenity_id)
+        if not amenity:
+            return {"error": "Amenity not found"}, 404
+        
+        place.add_amenity(amenity)
+        db.session.commit()
+
+        return {"message": f"Amenity '{amenity.name}' added to place '{place.title}'"}, 200

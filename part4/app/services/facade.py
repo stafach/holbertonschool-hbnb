@@ -90,4 +90,4 @@ class HBnBFacade:
         for review in reviews:
             if review.user_id == user_id and review.place_id == place_id:
                 return review
-            return None
+        return None
