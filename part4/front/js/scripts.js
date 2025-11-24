@@ -10,6 +10,19 @@ async function loginUser(email, password) {
     return response;
 }
 
+
+///Logout 
+function logout() {
+    document.cookie = "token=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
+    location.reload();
+}
+document.addEventListener("DOMContentLoaded", () => {
+    const logoutBtn = document.getElementById("logout");
+    if (logoutBtn) {
+        logoutBtn.addEventListener("click", logout);
+    }
+});
+
 /// Try to login
 document.addEventListener('DOMContentLoaded', () => {
     const loginForm = document.getElementById('login-form');
@@ -74,9 +87,16 @@ function getCookie(name) {
 async function checkHomeAuthentication() {
     const token = getCookie('token');
     const loginLink = document.getElementsByClassName('login-button');
+    const logout = document.getElementById('logout');
 
     for (const link of loginLink) {
-        link.style.display = token ? 'none' : 'block';
+        if (token) {
+            link.style.display = 'none';
+            logout.style.display = 'block';
+        } else {
+            link.style.display = 'block';
+            logout.style.display = 'none';
+        }
     }
 
     if (token) {
@@ -104,6 +124,17 @@ async function checkHomeAuthentication() {
             `;
             place_list.appendChild(card);
         });
+    } else {
+        price = document.querySelector('.places-wrapper');
+        places = document.querySelector('.places-content');
+        main = document.querySelector('main');
+        price.style.display = 'none';
+        places.style.display = 'none';
+
+        const message = document.createElement('h1');
+        message.classList.add('auth-message');
+        message.textContent = 'Please log in to see the available places.';
+        main.appendChild(message);
     }
 }
 
@@ -122,7 +153,7 @@ async function fetchPlaceDetails(token, placeId) {
         }
         const response = await fetch(`http://127.0.0.1:5000/api/v1/places/${placeId}`, {
             method: 'GET',
-            headers,
+            headers
         });
 
         if (!response.ok) {
@@ -144,9 +175,16 @@ async function checkPlaceAuthentication() {
     if (!placeId) return;
 
     const loginLink = document.getElementsByClassName('login-button');
+    const logout = document.getElementById('logout');
 
     for (const link of loginLink) {
-        link.style.display = token ? 'none' : 'block';
+        if (token) {
+            link.style.display = 'none';
+            logout.style.display = 'block';
+        } else {
+            link.style.display = 'block';
+            logout.style.display = 'none';
+        }
     }
 
     if (addReviewSection) {
@@ -175,10 +213,11 @@ async function checkPlaceAuthentication() {
     const card = document.createElement('div');
     card.classList.add('review-item');
     card.innerHTML = `
-        <h4>Reviews</h4>
+        <h4>${review.name}</h4>
         <p>Rating: ${review.rating} / 5</p>
         <p>${review.text}</p>
     `;
+    console.log(review);
     reviewsCard.appendChild(card);});
     console.log(place.reviews);
     const addReviewButton = document.createElement('button');
