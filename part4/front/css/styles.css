@@ -31,111 +31,198 @@ header .logo {
 }
 
 .logo {
-    height: 10rem;
+    height: 8rem;
     width: auto;
     display: inline-block;
 }
 
+/* =============================
+   NAVIGATION LINKS & BUTTONS
+   ============================= */
 nav a,
-.login-button {
-    color: #bb86ff;
+nav .login-button,
+nav button {
+    display: inline-block;
+    background: linear-gradient(90deg, #7b2ff7, #f107a3);
+    color: white;
+    border: none;
+    border-radius: 6px;
+    padding: 8px 16px;
     text-decoration: none;
-    font-weight: 500;
-    margin-left: 1.5rem;
-    transition: color 0.3s ease;
+    font: inherit;
+    cursor: pointer;
+    transition: transform 0.3s ease, background 0.3s ease;
+}
+
+nav a {
+    margin-right: 1rem; /* espace Home -> Login */
+}
+
+nav .login-button {
+    margin-right: 1rem; /* espace Login -> Logout */
+}
+
+nav button {
+    margin-left: 0;
 }
 
 nav a:hover,
-.login-button:hover {
-    color: #ffffff;
+nav .login-button:hover,
+nav button:hover {
+    transform: scale(1.05);
+    opacity: 0.9;
 }
 
+/* =============================
+   MAIN CONTENT
+   ============================= */
 main {
     flex: 1;
     padding: 2rem;
-    max-width: 1200px;
+    max-width: 1400px;
     margin: 0 auto;
 }
 
+/* Wrapper global */
 .places-wrapper {
     display: flex;
-    gap: 20px;
+    gap: 60px; /* plus espacé */
+    align-items: flex-start;
+    margin-top: 2rem;
 }
 
+/* =============================
+   FORMULAIRE (gauche)
+   ============================= */
 .filter-block {
     background: rgba(255, 255, 255, 0.05);
     border: 1px solid rgba(120, 60, 255, 0.3);
-    border-radius: 10px;
-    padding: 15px;
-    min-width: 150px;
+    border-radius: 20px;
+    padding: 25px;
+    min-width: 280px;
     height: fit-content;
-    box-shadow: 0 0 15px rgba(150, 80, 255, 0.3);
+    box-shadow: 0 0 30px rgba(150, 80, 255, 0.4);
+    backdrop-filter: blur(12px);
 }
 
 .filter-block label {
     display: block;
     margin-bottom: 10px;
     font-weight: 500;
-    color: #bb86ff;
+    color: #d8baff;
 }
 
-.filter-block select {
+.filter-block select,
+.filter-block input {
     width: 100%;
-    padding: 8px;
-    border-radius: 6px;
-    border: none;
-    background: rgba(255, 255, 255, 0.1);
+    padding: 12px;
+    border-radius: 12px;
+    border: 1px solid rgba(200, 150, 255, 0.25);
+    background: rgba(255, 255, 255, 0.08);
     color: white;
+    margin-bottom: 15px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: background 0.3s ease, transform 0.2s ease;
 }
 
+.filter-block select:hover,
+.filter-block input:hover {
+    background: rgba(255, 255, 255, 0.12);
+    transform: scale(1.02);
+}
+
+.filter-block select:focus,
+.filter-block input:focus {
+    outline: none;
+    border: 1px solid #bb86ff;
+    box-shadow: 0 0 8px rgba(160, 80, 255, 0.5);
+}
+
+/* =============================
+   TITRE RIGHT
+   ============================= */
 .places-content {
     display: flex;
     flex-direction: column;
     flex: 1;
+    position: relative;
 }
 
 .places-content h1 {
-    margin-bottom: 15px;
+    margin-bottom: 30px;
     color: #bb86ff;
 }
 
+/* Ligne lumineuse violette derrière les cards */
+.places-content::before {
+    content: "";
+    position: absolute;
+    top: 160px;
+    left: 0;
+    right: 0;
+    height: 2px;
+    background: linear-gradient(
+        90deg,
+        rgba(130, 0, 255, 0) 0%,
+        rgba(160, 80, 255, 0.8) 50%,
+        rgba(130, 0, 255, 0) 100%
+    );
+    box-shadow: 0 0 25px rgba(160, 80, 255, 0.6);
+}
+
+/* =============================
+   CARDS
+   ============================= */
 #places-list {
     display: flex;
     flex-wrap: wrap;
-    gap: 20px;
+    gap: 40px;
 }
 
 .place-card {
     background: rgba(255, 255, 255, 0.05);
     border: 1px solid rgba(120, 60, 255, 0.3);
-    border-radius: 10px;
-    padding: 10px;
+    border-radius: 25px;
+    padding: 0;
     margin: 0;
-    box-shadow: 0 0 20px rgba(150, 80, 255, 0.2);
+    width: 320px;
+    overflow: hidden;
+    box-shadow: 0 0 30px rgba(150, 80, 255, 0.25);
     transition: transform 0.3s ease, box-shadow 0.3s ease;
-    width: 220px;
 }
 
-.place-card:hover {
-    transform: scale(1.03);
-    box-shadow: 0 0 30px rgba(150, 80, 255, 0.4);
+.place-card::before {
+    content: "";
+    display: block;
+    height: 180px;
+    background: linear-gradient(180deg, #1a1a32, #0e0e20);
+}
+
+.place-card h3,
+.place-card p {
+    padding: 0 20px;
 }
 
 .place-card h3 {
-    color: #bb86ff;
+    color: white;
+    font-size: 1.3rem;
+    margin-top: 15px;
 }
 
 .place-card p {
-    margin-top: 8px;
+    opacity: 0.85;
+    margin-top: 6px;
 }
 
 .details-button {
     background: linear-gradient(90deg, #7b2ff7, #f107a3);
     border: none;
     color: white;
-    padding: 10px 20px;
-    border-radius: 8px;
-    margin-top: 10px;
+    padding: 12px;
+    border-radius: 12px;
+    width: calc(100% - 40px);
+    margin: 20px;
     cursor: pointer;
     transition: transform 0.3s ease, opacity 0.3s ease;
 }
@@ -145,6 +232,14 @@ main {
     opacity: 0.9;
 }
 
+.place-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 0 40px rgba(160, 80, 255, 0.45);
+}
+
+/* =============================
+   FORMS GLOBAL
+   ============================= */
 form {
     background: rgba(255, 255, 255, 0.05);
     border: 1px solid rgba(120, 60, 255, 0.3);
@@ -167,7 +262,9 @@ label {
     font-weight: 500;
 }
 
-input, select, textarea {
+input,
+select,
+textarea {
     width: 100%;
     padding: 8px;
     margin-top: 5px;
@@ -193,6 +290,9 @@ button:hover {
     transform: scale(1.05);
 }
 
+/* =============================
+   DETAILS + REVIEW
+   ============================= */
 .place-details {
     display: flex;
     flex-direction: column;
@@ -214,20 +314,10 @@ button:hover {
     margin-bottom: 20px;
 }
 
-
 .place-info {
     display: flex;
     flex-direction: column;
     gap: 10px;
-}
-
-footer {
-    background: rgba(255, 255, 255, 0.05);
-    border-top: 1px solid rgba(140, 80, 255, 0.4);
-    text-align: center;
-    padding: 1rem;
-    font-size: 0.9rem;
-    color: #bbb;
 }
 
 .review-card {
@@ -243,4 +333,174 @@ footer {
     border-radius: 10px;
     padding: 10px;
     box-shadow: 0 0 15px rgba(150, 80, 255, 0.2);
+}
+
+footer {
+    background: rgba(255, 255, 255, 0.05);
+    border-top: 1px solid rgba(140, 80, 255, 0.4);
+    text-align: center;
+    padding: 1rem;
+    font-size: 0.9rem;
+    color: #bbb;
+}
+
+/* =============================
+   ADD REVIEW FORM STYLING
+   ============================= */
+#review-form {
+    max-width: 500px;
+    width: 100%;
+    border-radius: 20px;
+    padding: 30px;
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(120, 60, 255, 0.3);
+    box-shadow: 0 0 30px rgba(150, 80, 255, 0.4);
+    backdrop-filter: blur(12px);
+    margin: 2rem auto; /* centré avec espace vertical */
+}
+
+#review-form h2 {
+    text-align: center;
+    color: #bb86ff;
+    margin-bottom: 20px;
+}
+
+#review-form label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: 500;
+    color: #d8baff;
+}
+
+#review-form textarea,
+#review-form select {
+    width: 100%;
+    padding: 12px;
+    margin-bottom: 15px;
+    border-radius: 12px;
+    border: 1px solid rgba(200, 150, 255, 0.25);
+    background: rgba(255, 255, 255, 0.08);
+    color: white;
+    font-weight: 500;
+    cursor: pointer;
+    transition: background 0.3s ease, transform 0.2s ease;
+}
+
+#review-form textarea:hover,
+#review-form select:hover {
+    background: rgba(255, 255, 255, 0.12);
+    transform: scale(1.02);
+}
+
+#review-form textarea:focus,
+#review-form select:focus {
+    outline: none;
+    border: 1px solid #bb86ff;
+    box-shadow: 0 0 8px rgba(160, 80, 255, 0.5);
+}
+
+#review-form button {
+    width: 100%;
+    background: linear-gradient(90deg, #7b2ff7, #f107a3);
+    border: none;
+    color: white;
+    padding: 12px;
+    border-radius: 12px;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: transform 0.3s ease, opacity 0.3s ease;
+}
+
+#review-form button:hover {
+    transform: scale(1.05);
+    opacity: 0.9;
+}
+
+
+/* =============================
+   PLACES WRAPPER
+   ============================= */
+#places-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 40px;
+    justify-content: center; /* centré comme le formulaire */
+    margin-top: 2rem;
+}
+
+/* =============================
+   PLACE CARD
+   ============================= */
+.place-card {
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(120, 60, 255, 0.3);
+    border-radius: 25px;
+    overflow: hidden;
+    width: 320px;
+    box-shadow: 0 0 30px rgba(150, 80, 255, 0.25);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    display: flex;
+    flex-direction: column;
+}
+
+.place-card::before {
+    content: "";
+    display: block;
+    height: 180px; /* zone image / couleur */
+    background: linear-gradient(180deg, #1a1a32, #0e0e20);
+}
+
+.place-card h3 {
+    color: #bb86ff;
+    font-size: 1.3rem;
+    margin: 15px 20px 5px 20px;
+}
+
+.place-card p {
+    color: #eaeaea;
+    opacity: 0.85;
+    margin: 0 20px 10px 20px;
+}
+
+.details-button {
+    background: linear-gradient(90deg, #7b2ff7, #f107a3);
+    border: none;
+    color: white;
+    padding: 12px;
+    border-radius: 12px;
+    margin: 10px 20px 20px 20px;
+    cursor: pointer;
+    transition: transform 0.3s ease, opacity 0.3s ease;
+    width: calc(100% - 40px);
+}
+
+.details-button:hover {
+    transform: scale(1.05);
+    opacity: 0.9;
+}
+
+.place-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 0 40px rgba(160, 80, 255, 0.45);
+}
+
+/* =============================
+   RESPONSIVE
+   ============================= */
+@media screen and (max-width: 768px) {
+    #places-list {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .place-card {
+        width: 90%;
+    }
+}
+
+.auth-message {
+    color: #bb86ff;
+    text-align: center;
+    margin-top: 50px;
+    font-size: 2rem;
 }
