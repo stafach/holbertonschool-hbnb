@@ -83,6 +83,18 @@ function getCookie(name) {
 }
 
 
+///Create user
+async function postUser(first_name, last_name, email, password) {
+    const response = await fetch('http://127.0.0.1:5000/api/v1/users/', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({first_name, last_name, email, password })
+    });
+    return response
+}
+
 /// Check user authentication
 async function checkHomeAuthentication() {
     const token = getCookie('token');
@@ -288,17 +300,17 @@ document.addEventListener('DOMContentLoaded', () => {
         for (const link of loginLink) {
             link.style.display = token ? 'none' : 'block';
         }
-
-        reviewForm.addEventListener('submit', async (event) => {
-            event.preventDefault();
+        
+        const buttonReview = document.getElementById('button_review');
+        buttonReview.addEventListener('click', async () => {
             const text = document.getElementById('review').value;
             const rating = document.getElementById('rating').value;
             try {
                 const response = await submitReview(token, placeId, text, rating);
 
                 if (response.ok) {
-                    alert('Review submitted successfully!');
                     window.location.href = `http://127.0.0.1:5500/part4/front/place.html?id=${placeId}`;
+                    alert('Review submitted successfully!');
                 } else {
                     const errorData = await response.json();
                     alert('Failed to submit review: ' + (errorData.error || response.statusText));
@@ -308,5 +320,32 @@ document.addEventListener('DOMContentLoaded', () => {
                 alert('An error occurred. Please try again.');
             }
         });
+    }
+
+
+    const createUser = document.getElementById('create_user');
+    if (createUser) {
+        const buttonUser = document.getElementById('create_user_button')
+        buttonUser.addEventListener('click', async () => {
+
+            const first_name = document.getElementById('first_name').value;
+            const last_name = document.getElementById('last_name').value;
+            const email = document.getElementById('email').value;
+            const password = document.getElementById('password').value;
+
+            try {
+                const response = await postUser(first_name, last_name, email, password);
+
+                if (response.ok) {
+                    window.location.href = 'index.html';
+                } else {
+                    const errorData = await response.json();
+                    alert('Login failed: ' + (errorData.error || response.statusText));
+                }
+            } catch (error) {
+                console.error('Error during account creation:', error);
+                alert('An error occurred. Please try again.');
+            }
+        });    
     }
 });
