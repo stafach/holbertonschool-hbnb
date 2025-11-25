@@ -504,3 +504,23 @@ footer {
     margin-top: 50px;
     font-size: 2rem;
 }
+
+.styled-link {
+    display: block;
+    text-align: center;
+    background: linear-gradient(90deg, #7b2ff7, #f107a3);
+    color: white;
+    border: none;
+    border-radius: 6px;
+    padding: 10px;
+    margin-top: 30px;
+    text-decoration: none;
+    font-weight: 500;
+    cursor: pointer;
+    transition: transform 0.3s ease, opacity 0.3s ease;
+}
+
+.styled-link:hover {
+    transform: scale(1.05);
+    opacity: 0.9;
+}
