@@ -337,7 +337,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 const response = await postUser(first_name, last_name, email, password);
 
                 if (response.ok) {
-                    window.location.href = 'index.html';
+                    window.location.href = 'login.html';
                 } else {
                     const errorData = await response.json();
                     alert('Login failed: ' + (errorData.error || response.statusText));
