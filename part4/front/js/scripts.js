@@ -100,13 +100,16 @@ async function checkHomeAuthentication() {
     const token = getCookie('token');
     const loginLink = document.getElementsByClassName('login-button');
     const logout = document.getElementById('logout');
+    const create_user = document.getElementById('create_user');
 
     for (const link of loginLink) {
         if (token) {
             link.style.display = 'none';
+            create_user.style.display = 'none'
             logout.style.display = 'block';
         } else {
             link.style.display = 'block';
+            create_user.style.display = 'block'
             logout.style.display = 'none';
         }
     }
