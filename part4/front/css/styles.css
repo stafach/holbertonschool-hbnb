@@ -39,6 +39,12 @@ header .logo {
 /* =============================
    NAVIGATION LINKS & BUTTONS
    ============================= */
+nav {
+    display: flex;          /* aligne tous les éléments sur une ligne */
+    gap: 1.5rem;            /* espace uniforme entre tous les liens et boutons */
+    align-items: center;    /* aligne verticalement */
+}
+
 nav a,
 nav .login-button,
 nav button {
@@ -52,18 +58,7 @@ nav button {
     font: inherit;
     cursor: pointer;
     transition: transform 0.3s ease, background 0.3s ease;
-}
-
-nav a {
-    margin-right: 1rem; /* espace Home -> Login */
-}
-
-nav .login-button {
-    margin-right: 1rem; /* espace Login -> Logout */
-}
-
-nav button {
-    margin-left: 0;
+    white-space: nowrap;    /* empêche le texte de se couper */
 }
 
 nav a:hover,
@@ -178,6 +173,7 @@ main {
     display: flex;
     flex-wrap: wrap;
     gap: 40px;
+    justify-content: center;
 }
 
 .place-card {
@@ -190,6 +186,8 @@ main {
     overflow: hidden;
     box-shadow: 0 0 30px rgba(150, 80, 255, 0.25);
     transition: transform 0.3s ease, box-shadow 0.3s ease;
+    display: flex;
+    flex-direction: column;
 }
 
 .place-card::before {
@@ -205,7 +203,7 @@ main {
 }
 
 .place-card h3 {
-    color: white;
+    color: #bb86ff;
     font-size: 1.3rem;
     margin-top: 15px;
 }
@@ -416,74 +414,6 @@ footer {
     opacity: 0.9;
 }
 
-
-/* =============================
-   PLACES WRAPPER
-   ============================= */
-#places-list {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 40px;
-    justify-content: center; /* centré comme le formulaire */
-    margin-top: 2rem;
-}
-
-/* =============================
-   PLACE CARD
-   ============================= */
-.place-card {
-    background: rgba(255, 255, 255, 0.05);
-    border: 1px solid rgba(120, 60, 255, 0.3);
-    border-radius: 25px;
-    overflow: hidden;
-    width: 320px;
-    box-shadow: 0 0 30px rgba(150, 80, 255, 0.25);
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-    display: flex;
-    flex-direction: column;
-}
-
-.place-card::before {
-    content: "";
-    display: block;
-    height: 180px; /* zone image / couleur */
-    background: linear-gradient(180deg, #1a1a32, #0e0e20);
-}
-
-.place-card h3 {
-    color: #bb86ff;
-    font-size: 1.3rem;
-    margin: 15px 20px 5px 20px;
-}
-
-.place-card p {
-    color: #eaeaea;
-    opacity: 0.85;
-    margin: 0 20px 10px 20px;
-}
-
-.details-button {
-    background: linear-gradient(90deg, #7b2ff7, #f107a3);
-    border: none;
-    color: white;
-    padding: 12px;
-    border-radius: 12px;
-    margin: 10px 20px 20px 20px;
-    cursor: pointer;
-    transition: transform 0.3s ease, opacity 0.3s ease;
-    width: calc(100% - 40px);
-}
-
-.details-button:hover {
-    transform: scale(1.05);
-    opacity: 0.9;
-}
-
-.place-card:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 0 40px rgba(160, 80, 255, 0.45);
-}
-
 /* =============================
    RESPONSIVE
    ============================= */
@@ -505,6 +435,7 @@ footer {
     font-size: 2rem;
 }
 
+/* STYLE DES LIENS COMME LES BOUTONS */
 .styled-link {
     display: block;
     text-align: center;
@@ -513,7 +444,7 @@ footer {
     border: none;
     border-radius: 6px;
     padding: 10px;
-    margin-top: 30px;
+    margin-top: 15px;
     text-decoration: none;
     font-weight: 500;
     cursor: pointer;
