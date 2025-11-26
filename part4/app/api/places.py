@@ -179,6 +179,11 @@ class PlaceAmenityResource(Resource):
         if not place:
             return {"error": "Place not found"}, 404
         
+        current_user = get_jwt_identity()
+        
+        if not place.owner_id == current_user:
+            return {"error": "Only owner can add amenities"}
+        
         amenity_id = api.payload.get('amenity_id')
         amenity = facade.get_amenity(amenity_id)
         if not amenity:
