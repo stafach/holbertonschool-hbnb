@@ -15,17 +15,22 @@
     </header>
 
     <main>
-        <form id="login-form">
-            <h2>Login to BlockBnB</h2>
+        <form id="create_user">
+            <h2>Create Your Account</h2>
+            <label for="first_name">First name</label>
+            <input type="first_name" name="first_name" id="first_name" required>
+            
+            <label for="last_name">Last name</label>
+            <input type="last_name" name="last_name" id="last_name" required>
+            
             <label for="email">Email:</label>
             <input type="email" id="email" name="email" required>
             
             <label for="password">Password:</label>
             <input type="password" id="password" name="password" required>
             
-            <button type="submit">Login</button>
+            <button type="button" id="create_user_button">Create user</button>
         </form>
-        <a href="create_user.html" class="styled-link">Create user</a>
     </main>
 
     <footer>
