@@ -40,7 +40,10 @@ document.addEventListener('DOMContentLoaded', () => {
                 if (response.ok) {
                     const data = await response.json();
                     document.cookie = `token=${data.access_token}; path=/`;
-                    window.location.href = 'index.html';
+
+                    localStorage.setItem("user_id", data.user_id);
+
+                    window.location.href = "index.html";
                 } else {
                     const errorData = await response.json();
                     alert('Login failed: ' + (errorData.error || response.statusText));
@@ -101,16 +104,19 @@ async function checkHomeAuthentication() {
     const loginLink = document.getElementsByClassName('login-button');
     const logout = document.getElementById('logout');
     const create_user = document.getElementById('create_user');
+    const update_user = document.getElementById('update_user');
 
     for (const link of loginLink) {
         if (token) {
             link.style.display = 'none';
             create_user.style.display = 'none'
             logout.style.display = 'block';
+            update_user.style.display = 'block';
         } else {
             link.style.display = 'block';
             create_user.style.display = 'block'
             logout.style.display = 'none';
+            update_user.style.display = 'none';
         }
     }
 
@@ -154,7 +160,7 @@ async function checkHomeAuthentication() {
 }
 
 /// Get the place id
-function getPlaceIdFromURL() {
+function getIdFromURL() {
     const params = new URLSearchParams(window.location.search);
     return params.get("id");
 }
@@ -184,7 +190,7 @@ async function fetchPlaceDetails(token, placeId) {
 
 async function checkPlaceAuthentication() {
     const token = getCookie('token');
-    const placeId = getPlaceIdFromURL();
+    const placeId = getIdFromURL();
     const addReviewSection = document.getElementById('add-review');
 
     if (!placeId) return;
@@ -240,7 +246,9 @@ async function checkPlaceAuthentication() {
     addReviewButton.addEventListener('click', () => {
         window.location.href = `add_review.html?id=${place.id}`;
     });
-    placeInfo.appendChild(addReviewButton);
+    if (token) {
+        placeInfo.appendChild(addReviewButton);
+    }
 }
 
 
@@ -267,6 +275,18 @@ function checkReviewsAuthentication() {
         window.location.href = 'index.html';
     }
     return token;
+}
+
+async function updateUser(token, userID, first_name, last_name) {
+    const response = await fetch(`http://127.0.0.1:5000/api/v1/users/${userID}`, {
+        method : 'PUT',
+        headers: {
+                'Authorization': `Bearer ${token}`,
+                'Content-Type': 'application/json'
+            },
+        body: JSON.stringify({first_name, last_name})
+    });
+        return response;
 }
 
 
@@ -297,17 +317,25 @@ document.addEventListener('DOMContentLoaded', () => {
     const reviewForm = document.getElementById('review-form');
     if (reviewForm) {
         const token = checkReviewsAuthentication();
-        const placeId = getPlaceIdFromURL();
-        const loginLink = document.getElementsByClassName('login-button');
+        const placeId = getIdFromURL();
 
-        for (const link of loginLink) {
-            link.style.display = token ? 'none' : 'block';
-        }
-        
         const buttonReview = document.getElementById('button_review');
         buttonReview.addEventListener('click', async () => {
             const text = document.getElementById('review').value;
             const rating = document.getElementById('rating').value;
+            const textValue = document.getElementById('review').value.trim();
+            const ratingValue = document.getElementById('rating').value;
+
+            if (!textValue) {
+                alert("Please enter a review.");
+                return;
+            }
+
+            if (!ratingValue) {
+                alert("Please select a rating.");
+                return;
+            }
+
             try {
                 const response = await submitReview(token, placeId, text, rating);
 
@@ -343,12 +371,38 @@ document.addEventListener('DOMContentLoaded', () => {
                     window.location.href = 'login.html';
                 } else {
                     const errorData = await response.json();
-                    alert('Login failed: ' + (errorData.error || response.statusText));
+                    alert('Create user fail: ' + (errorData.error || response.statusText));
                 }
             } catch (error) {
                 console.error('Error during account creation:', error);
                 alert('An error occurred. Please try again.');
             }
         });    
+    }
+
+    const update_the_user = document.getElementById('update_the_user');
+    if (update_the_user) {
+        const updateUserButton = document.getElementById('update_user_button');
+        updateUserButton.addEventListener('click', async () => {
+            const token = getCookie('token');
+            const first_name = document.getElementById('first_name').value;
+            const last_name = document.getElementById('last_name').value;
+            const userID = localStorage.getItem("user_id");
+
+            try {
+                const response = await updateUser(token, userID, first_name, last_name)
+
+                if (response.ok) {
+                    window.location.href = 'index.html';
+                    alert('Profil updated successfully!');
+                } else {
+                    const errorData = await response.json();
+                    alert('Update user fail: ' + (errorData.error || response.statusText));
+                }
+            } catch (error) {
+                console.error('Error during profil update:', error);
+                alert('An error occurred. Please try again.');
+            }
+        });
     }
 });
