@@ -40,9 +40,9 @@ header .logo {
    NAVIGATION LINKS & BUTTONS
    ============================= */
 nav {
-    display: flex;          /* aligne tous les éléments sur une ligne */
-    gap: 1.5rem;            /* espace uniforme entre tous les liens et boutons */
-    align-items: center;    /* aligne verticalement */
+    display: flex;
+    gap: 1.5rem;
+    align-items: center;  /* aligne verticalement tous les éléments */
 }
 
 nav a,
@@ -58,7 +58,7 @@ nav button {
     font: inherit;
     cursor: pointer;
     transition: transform 0.3s ease, background 0.3s ease;
-    white-space: nowrap;    /* empêche le texte de se couper */
+    white-space: nowrap;
 }
 
 nav a:hover,
@@ -81,7 +81,7 @@ main {
 /* Wrapper global */
 .places-wrapper {
     display: flex;
-    gap: 60px; /* plus espacé */
+    gap: 60px;
     align-items: flex-start;
     margin-top: 2rem;
 }
@@ -354,7 +354,7 @@ footer {
     border: 1px solid rgba(120, 60, 255, 0.3);
     box-shadow: 0 0 30px rgba(150, 80, 255, 0.4);
     backdrop-filter: blur(12px);
-    margin: 2rem auto; /* centré avec espace vertical */
+    margin: 2rem auto;
 }
 
 #review-form h2 {
@@ -454,4 +454,11 @@ footer {
 .styled-link:hover {
     transform: scale(1.05);
     opacity: 0.9;
+}
+
+nav button#logout {
+    display: inline-block; /* force le bouton à rester sur la ligne */
+    width: auto;           /* retire largeur par défaut */
+    padding: 8px 16px;     /* même padding que les liens */
+    margin: 0;             /* supprime marges qui poussent vers le bas */
 }
