@@ -246,7 +246,9 @@ async function checkPlaceAuthentication() {
     addReviewButton.addEventListener('click', () => {
         window.location.href = `add_review.html?id=${place.id}`;
     });
-    placeInfo.appendChild(addReviewButton);
+    if (token) {
+        placeInfo.appendChild(addReviewButton);
+    }
 }
 
 
@@ -316,16 +318,24 @@ document.addEventListener('DOMContentLoaded', () => {
     if (reviewForm) {
         const token = checkReviewsAuthentication();
         const placeId = getIdFromURL();
-        const loginLink = document.getElementsByClassName('login-button');
 
-        for (const link of loginLink) {
-            link.style.display = token ? 'none' : 'block';
-        }
-        
         const buttonReview = document.getElementById('button_review');
         buttonReview.addEventListener('click', async () => {
             const text = document.getElementById('review').value;
             const rating = document.getElementById('rating').value;
+            const textValue = document.getElementById('review').value.trim();
+            const ratingValue = document.getElementById('rating').value;
+
+            if (!textValue) {
+                alert("Please enter a review.");
+                return;
+            }
+
+            if (!ratingValue) {
+                alert("Please select a rating.");
+                return;
+            }
+
             try {
                 const response = await submitReview(token, placeId, text, rating);
 
